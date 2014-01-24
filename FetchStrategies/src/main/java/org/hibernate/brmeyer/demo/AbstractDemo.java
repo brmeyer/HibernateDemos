@@ -28,7 +28,7 @@ import org.hibernate.cfg.Configuration;
 /**
  * @author Brett Meyer
  */
-public class AbstractDemo {
+public abstract class AbstractDemo {
 	
 	private final SessionFactory sessionFactory;
 	

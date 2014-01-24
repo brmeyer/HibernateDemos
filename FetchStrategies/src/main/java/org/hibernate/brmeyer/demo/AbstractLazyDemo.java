@@ -21,47 +21,26 @@
 package org.hibernate.brmeyer.demo;
 
 import org.hibernate.Session;
-import org.hibernate.brmeyer.demo.entity.eager.Comment;
-import org.hibernate.brmeyer.demo.entity.eager.Community;
-import org.hibernate.brmeyer.demo.entity.eager.Donation;
-import org.hibernate.brmeyer.demo.entity.eager.Project;
-import org.hibernate.brmeyer.demo.entity.eager.ServiceEvent;
-import org.hibernate.brmeyer.demo.entity.eager.Skill;
-import org.hibernate.brmeyer.demo.entity.eager.Tool;
-import org.hibernate.brmeyer.demo.entity.eager.User;
+import org.hibernate.brmeyer.demo.entity.lazy.Comment;
+import org.hibernate.brmeyer.demo.entity.lazy.Community;
+import org.hibernate.brmeyer.demo.entity.lazy.Donation;
+import org.hibernate.brmeyer.demo.entity.lazy.Project;
+import org.hibernate.brmeyer.demo.entity.lazy.ServiceEvent;
+import org.hibernate.brmeyer.demo.entity.lazy.Skill;
+import org.hibernate.brmeyer.demo.entity.lazy.Tool;
+import org.hibernate.brmeyer.demo.entity.lazy.User;
 
 /**
  * @author Brett Meyer
  */
-public class Eager extends AbstractDemo {
+public abstract class AbstractLazyDemo extends AbstractDemo {
 	
-	public Eager() {
+	protected AbstractLazyDemo() {
 		super( Comment.class, Community.class, Donation.class, Skill.class, Tool.class,
 				Project.class, ServiceEvent.class, User.class);
 	}
 	
-	/**
-	 * Demonstrates a typical, over-simplified, over-scoped DAO method.  If EAGER associations exist, this can
-	 * result in an exponentially deep fetch tree and ridiculous amount of selects.
-	 */
-	public boolean getUser(int id) {
-		persistData();
-		
-		final Session session = openSession();
-		session.getTransaction().begin();
-		final User user = (User) session.get( User.class, id );
-		session.getTransaction().commit();
-		
-		return user != null;
-	}
-	
-	public static void main (String[] args) {
-		final Eager demo = new Eager();
-		int userId = demo.persistData();
-		demo.getUser(userId);
-	}
-	
-	public int persistData() {
+	protected int persistData() {
 		final User user1 = new User();
 		final User user2 = new User();
 		final User user3 = new User();
