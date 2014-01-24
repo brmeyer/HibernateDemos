@@ -31,6 +31,8 @@ subprojects {
     dependencies {
 		compile( 'org.hibernate:hibernate-core:' + rootProject.hibernateVersion )
 		compile( 'org.hibernate:hibernate-entitymanager:' + rootProject.hibernateVersion )
+		compile( 'org.hibernate:hibernate-entitymanager:' + rootProject.hibernateVersion )
+		runtime( 'com.h2database:h2:1.3.175' )
 	}
 
 	tasks.withType( JavaCompile.class ).all { task->
