@@ -1,4 +1,4 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.eager;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Community {
 		return creator;
 	}
 
-	public void setCreater(User creator) {
+	public void setCreator(User creator) {
 		this.creator = creator;
 	}
 }

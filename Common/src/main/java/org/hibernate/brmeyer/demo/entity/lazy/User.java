@@ -1,5 +1,6 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.lazy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.NaturalId;
 
 @Entity
 public class User {
@@ -21,6 +24,7 @@ public class User {
 
 	private String city;
 
+	@NaturalId
 	private String email;
 
 	private String firstName;
@@ -34,25 +38,34 @@ public class User {
 	private String zip;
 	
 	@ManyToMany
-	private List<Community> communityMemberships;
+	private List<Community> communityMemberships = new ArrayList<Community>();
 	
 	@OneToMany(mappedBy = "creator")
-	private List<Community> communitiesCreated;
+	private List<Community> communitiesCreated = new ArrayList<Community>();
 	
 	@ManyToMany
-	private List<Skill> skills;
+	private List<Skill> skills = new ArrayList<Skill>();
 	
 	@ManyToMany
-	private List<Tool> tools;
+	private List<Tool> tools = new ArrayList<Tool>();
 	
 	@OneToMany(mappedBy = "submitter")
-	private List<Project> projectsSubmitted;
+	private List<Project> projectsSubmitted = new ArrayList<Project>();
+	
+	@OneToMany(mappedBy = "organizer")
+	private List<Project> projectsOrganized = new ArrayList<Project>();
 	
 	@ManyToMany(mappedBy = "volunteers")
-	private List<Project> projectsVolunteered;
+	private List<Project> projectsVolunteered = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy = "submitter")
-	private List<Comment> comments;
+	private List<Comment> comments = new ArrayList<Comment>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Donation> donations = new ArrayList<Donation>();
+	
+	@OneToMany(mappedBy = "organizer")
+	private List<ServiceEvent> serviceEventsOrganized = new ArrayList<ServiceEvent>();
 	
 	public int getId() {
 		return id;
@@ -174,6 +187,14 @@ public class User {
 		this.projectsSubmitted = projectsSubmitted;
 	}
 	
+	public List<Project> getProjectsOrganized() {
+		return projectsOrganized;
+	}
+	
+	public void setProjectsOrganized(List<Project> projectsOrganized) {
+		this.projectsOrganized = projectsOrganized;
+	}
+	
 	public List<Project> getProjectsVolunteered() {
 		return projectsVolunteered;
 	}
@@ -188,5 +209,21 @@ public class User {
 	
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public List<Donation> getDonations() {
+		return donations;
+	}
+	
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
+	}
+	
+	public List<ServiceEvent> getServiceEventsOrganized() {
+		return serviceEventsOrganized;
+	}
+	
+	public void setServiceEventsOrganized(List<ServiceEvent> serviceEventsOrganized) {
+		this.serviceEventsOrganized = serviceEventsOrganized;
 	}
 }

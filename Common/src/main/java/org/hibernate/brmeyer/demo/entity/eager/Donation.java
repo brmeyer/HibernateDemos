@@ -1,4 +1,4 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.eager;
 
 import java.util.Date;
 

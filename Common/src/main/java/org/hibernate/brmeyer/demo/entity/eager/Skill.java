@@ -1,4 +1,4 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.eager;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

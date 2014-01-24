@@ -1,11 +1,11 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.lazy;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Tool {
+public class Skill {
 	
 	@Id
 	@GeneratedValue

@@ -1,4 +1,4 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.eager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -6,11 +6,13 @@ import java.util.List;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Project {
@@ -48,11 +50,17 @@ public class Project {
 
 	private String zip;
 
-	@ManyToMany
-	private List<User> volunteers;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<User> volunteers = new ArrayList<User>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> imageUrls = new ArrayList<String>();
+    
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private List<Comment> comments = new ArrayList<Comment>();
+    
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    private List<Donation> donations = new ArrayList<Donation>();
     
     private String title;
 
@@ -190,5 +198,21 @@ public class Project {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+	
+	public List<Donation> getDonations() {
+		return donations;
+	}
+	
+	public void setDonations(List<Donation> donations) {
+		this.donations = donations;
 	}
 }

@@ -1,9 +1,11 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.eager;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
@@ -30,8 +32,8 @@ public class ServiceEvent {
 
 	private String name;
 
-	@ManyToMany
-	private List<Project> projects;
+	@ManyToMany(fetch = FetchType.EAGER)
+	private List<Project> projects = new ArrayList<Project>();
 
 	public User getOrganizer() {
 		return organizer;

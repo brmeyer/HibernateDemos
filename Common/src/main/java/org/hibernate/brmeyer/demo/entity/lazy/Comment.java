@@ -1,4 +1,4 @@
-package org.hibernate.brmeyer.demo.entity;
+package org.hibernate.brmeyer.demo.entity.lazy;
 
 import java.util.Calendar;
 
