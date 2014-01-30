@@ -45,8 +45,6 @@ public class Eager extends AbstractDemo {
 	 * result in an exponentially deep fetch tree and ridiculous amount of selects.
 	 */
 	public boolean getUser(int id) {
-		persistData();
-		
 		final Session session = openSession();
 		session.getTransaction().begin();
 		final User user = (User) session.get( User.class, id );

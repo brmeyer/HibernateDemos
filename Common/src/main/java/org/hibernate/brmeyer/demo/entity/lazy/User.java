@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -41,13 +44,18 @@ public class User {
 	private List<Community> communityMemberships = new ArrayList<Community>();
 	
 	@OneToMany(mappedBy = "creator")
+	@BatchSize(size = 5)
 	private List<Community> communitiesCreated = new ArrayList<Community>();
 	
 	@ManyToMany
+	@Fetch(FetchMode.SUBSELECT)
 	private List<Skill> skills = new ArrayList<Skill>();
 	
 	@ManyToMany
 	private List<Tool> tools = new ArrayList<Tool>();
+	
+	@OneToMany(mappedBy = "user")
+	private List<Donation> donations = new ArrayList<Donation>();
 	
 	@OneToMany(mappedBy = "submitter")
 	private List<Project> projectsSubmitted = new ArrayList<Project>();
@@ -60,9 +68,6 @@ public class User {
 	
 	@OneToMany(mappedBy = "submitter")
 	private List<Comment> comments = new ArrayList<Comment>();
-	
-	@OneToMany(mappedBy = "user")
-	private List<Donation> donations = new ArrayList<Donation>();
 	
 	@OneToMany(mappedBy = "organizer")
 	private List<ServiceEvent> serviceEventsOrganized = new ArrayList<ServiceEvent>();

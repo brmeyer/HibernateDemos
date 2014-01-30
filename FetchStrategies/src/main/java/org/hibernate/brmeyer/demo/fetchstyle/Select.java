@@ -18,32 +18,46 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA  02110-1301, USA.
  */
-package org.hibernate.brmeyer.demo;
+package org.hibernate.brmeyer.demo.fetchstyle;
 
+import java.util.List;
+
+import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.brmeyer.demo.AbstractLazyDemo;
 import org.hibernate.brmeyer.demo.entity.lazy.User;
 
 /**
  * @author Brett Meyer
  */
-public class SimpleLazy extends AbstractLazyDemo {
-	
-	/**
-	 * Similar to {@link Eager}, demonstrating a typical, over-simplified, over-scoped DAO method.  However, for
-	 * demo-purposes, all collections are LAZY (as they usually should be), resulting in a single select.
-	 */
-	public boolean getUser(int id) {
+public class Select extends AbstractLazyDemo {
+
+	@SuppressWarnings("unchecked")
+	public List<User> getUsers() {
 		final Session session = openSession();
 		session.getTransaction().begin();
-		final User user = (User) session.get( User.class, id );
-		session.getTransaction().commit();
+
+		final List<User> users = session
+				.createCriteria( User.class )
+				.setFetchMode( "communityMemberships", FetchMode.SELECT ) // not necessary (default)
+				.list();
 		
-		return user != null;
+		// init
+		users.get( 0 ).getCommunityMemberships().size();
+		users.get( 1 ).getCommunityMemberships().size();
+
+		session.getTransaction().commit();
+		return users;
 	}
-	
-	public static void main (String[] args) {
-		final SimpleLazy demo = new SimpleLazy();
-		int userId = demo.persistData();
-		demo.getUser( userId );
+
+	public static void main(String[] args) {
+		final Select demo = new Select();
+		demo.persistData();
+		final List<User> users = demo.getUsers();
+		// ensure it was fetched
+		for ( final User user : users ) {
+			System.out.println( "fetched: " + Hibernate.isInitialized( user.getCommunityMemberships() ) );
+		}
 	}
 }
