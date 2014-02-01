@@ -1,5 +1,4 @@
 *.class
-*.jar
 *.war
 *.ear
 .gradle
@@ -8,3 +7,4 @@
 .settings
 .metadata
 bin
+build
