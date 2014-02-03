@@ -77,7 +77,6 @@ public class SecondLevelCachingDemo extends AbstractCachingDemo {
 		
 		System.out.println("EVICT");
 		demo.evictProject( projectId );
-		demo.printStats();
 		
 		System.out.println("GET PROJECT, ATTEMPT #3");
 		// DB hit
