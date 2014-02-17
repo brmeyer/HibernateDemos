@@ -32,6 +32,7 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.engine.spi.SessionImplementor;
 
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.io.WKTReader;
 
 /**
@@ -52,7 +53,7 @@ public class SpatialDemo {
 		final Project project = new Project();
 		project.setName( name );
 		
-		project.setLocation( wktToGeometry( locationWkt ));
+		project.setLocation( (Point) wktToGeometry( locationWkt ));
 		
 		final Session s = openSession();
 		s.getTransaction().begin();

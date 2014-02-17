@@ -55,6 +55,11 @@ public class EnversDemo {
 		project.setType( "fooType" );
 		s.persist( project );
 		
+		final Project project2 = new Project();
+		project2.setName( "barName" );
+		project2.setType( "barType" );
+		s.persist( project2 );
+		
 		s.getTransaction().commit();
 		
 		for (int i = 0; i < 5; i++) {
@@ -133,9 +138,11 @@ public class EnversDemo {
 		results = demo.getProjectRevisions( "type" );
 		demo.printRevisions( results );
 		
-		System.out.println("***** PROJECT IN REVISION #3 *****");
-		Project project = (Project) demo.getRevisionProjects( 3 ).get( 0 );
-		System.out.println(project.toString());
+		System.out.println("***** PROJECTS IN REVISION #3 *****");
+		for (Object obj : demo.getRevisionProjects( 3 )) {
+			Project project = (Project) obj;
+			System.out.println(project.toString());
+		}
 		
 		System.exit(0);
 	}

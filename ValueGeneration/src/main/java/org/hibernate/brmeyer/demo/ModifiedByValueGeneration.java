@@ -51,12 +51,12 @@ public class ModifiedByValueGeneration implements AnnotationValueGeneration<Modi
 	}
 
 	public boolean referenceColumnInSql() {
-		// n/a
+		// not used -- needed only for in-DB generation
 		return false;
 	}
 
 	public String getDatabaseGeneratedReferencedColumnValue() {
-		// n/a
+		// not used -- needed only for in-DB generation
 		return null;
 	}
 }

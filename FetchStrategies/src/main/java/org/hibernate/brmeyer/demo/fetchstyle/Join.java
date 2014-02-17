@@ -57,5 +57,7 @@ public class Join extends AbstractLazyDemo {
 		for ( final User user : users ) {
 			System.out.println( "fetched: " + Hibernate.isInitialized( user.getSkills() ) );
 		}
+		
+		System.exit(0);
 	}
 }

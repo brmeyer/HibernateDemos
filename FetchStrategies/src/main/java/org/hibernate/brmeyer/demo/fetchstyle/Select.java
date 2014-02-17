@@ -59,5 +59,7 @@ public class Select extends AbstractLazyDemo {
 		for ( final User user : users ) {
 			System.out.println( "fetched: " + Hibernate.isInitialized( user.getCommunityMemberships() ) );
 		}
+		
+		System.exit(0);
 	}
 }

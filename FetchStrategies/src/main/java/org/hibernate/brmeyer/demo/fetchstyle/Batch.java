@@ -77,5 +77,7 @@ public class Batch extends AbstractLazyDemo {
 		for ( final User user : users ) {
 			System.out.println( "fetched: " + Hibernate.isInitialized( user.getCommunitiesCreated() ) );
 		}
+		
+		System.exit(0);
 	}
 }

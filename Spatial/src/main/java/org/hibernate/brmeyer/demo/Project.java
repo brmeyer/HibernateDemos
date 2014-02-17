@@ -26,7 +26,7 @@ import javax.persistence.Id;
 
 import org.hibernate.annotations.Type;
 
-import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 
 /**
  * @author Brett Meyer
@@ -38,7 +38,7 @@ public class Project {
 	private long id;
 	
 	@Type(type="org.hibernate.spatial.GeometryType")
-    private Geometry location;
+    private Point location;
 	
 	private String name;
 
@@ -50,11 +50,11 @@ public class Project {
 		this.id = id;
 	}
 	
-	public Geometry getLocation() {
+	public Point getLocation() {
 		return location;
 	}
 	
-	public void setLocation(Geometry location) {
+	public void setLocation(Point location) {
 		this.location = location;
 	}
 	

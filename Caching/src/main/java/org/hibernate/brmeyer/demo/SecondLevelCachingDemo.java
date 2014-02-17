@@ -78,15 +78,15 @@ public class SecondLevelCachingDemo extends AbstractCachingDemo {
 		System.out.println("EVICT");
 		demo.evictProject( projectId );
 		
-		System.out.println("GET PROJECT, ATTEMPT #3");
-		// DB hit
-		project = demo.getProject(projectId);
-		demo.printStats();
-		
 		System.out.println("GET USER");
 		// Even though the Project was evicted, will NOT cause another fetch unless the User (or all entities)
 		// is explicitly evicted.
 		demo.getUser(project.getAssignee().getId());
+		demo.printStats();
+		
+		System.out.println("GET PROJECT, ATTEMPT #3");
+		// DB hit
+		project = demo.getProject(projectId);
 		demo.printStats();
 		
 		System.exit(0);
