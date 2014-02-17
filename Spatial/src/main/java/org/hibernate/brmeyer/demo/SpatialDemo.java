@@ -97,7 +97,8 @@ public class SpatialDemo {
 			
 			printProjects(demo.getProjects("POLYGON((0 0, 4 0, 4 4, 0 4, 0 0))"));
 			printProjects(demo.getProjects("POLYGON((10 10, 14 10, 14 14, 10 14, 10 10))"));
-			
+
+			System.exit(0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

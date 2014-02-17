@@ -45,5 +45,7 @@ public class SimpleLazy extends AbstractLazyDemo {
 		final SimpleLazy demo = new SimpleLazy();
 		int userId = demo.persistData();
 		demo.getUser( userId );
+		
+		System.exit(0);
 	}
 }

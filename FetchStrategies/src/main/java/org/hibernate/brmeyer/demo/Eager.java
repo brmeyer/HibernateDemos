@@ -57,6 +57,8 @@ public class Eager extends AbstractDemo {
 		final Eager demo = new Eager();
 		int userId = demo.persistData();
 		demo.getUser(userId);
+		
+		System.exit(0);
 	}
 	
 	public int persistData() {

@@ -56,7 +56,6 @@ public class EnversDemo {
 		s.persist( project );
 		
 		s.getTransaction().commit();
-		s.clear();
 		
 		for (int i = 0; i < 5; i++) {
 			s.getTransaction().begin();
@@ -65,8 +64,12 @@ public class EnversDemo {
 			s.update( project );
 			
 			s.getTransaction().commit();
-			s.clear();
 		}
+		
+		s.getTransaction().begin();
+		project.setType( "fooType1" );
+		s.update( project );
+		s.getTransaction().commit();
 		
 		s.close();
 	}
@@ -126,13 +129,14 @@ public class EnversDemo {
 		results = demo.getProjectRevisions( "name" );
 		demo.printRevisions( results );
 		
-		// TODO: Not working!  Still prints all revisions, even though only #name was updated!
-//		System.out.println("***** PROJECT REVISIONS THAT UPDATED #TYPE *****");
-//		results = demo.getProjectRevisions( "type" );
-//		demo.printRevisions( results );
+		System.out.println("***** PROJECT REVISIONS THAT UPDATED #TYPE *****");
+		results = demo.getProjectRevisions( "type" );
+		demo.printRevisions( results );
 		
 		System.out.println("***** PROJECT IN REVISION #3 *****");
 		Project project = (Project) demo.getRevisionProjects( 3 ).get( 0 );
 		System.out.println(project.toString());
+		
+		System.exit(0);
 	}
 }
