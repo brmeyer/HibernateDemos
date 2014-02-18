@@ -42,6 +42,7 @@ public class EnversDemo {
 	public EnversDemo() {
 		final Configuration configuration = new Configuration();
 		configuration.addAnnotatedClass( Project.class );
+		configuration.addAnnotatedClass( CustomRevisionEntity.class );
 		sessionFactory = configuration.buildSessionFactory(
 				new StandardServiceRegistryBuilder().build() );
 	}
