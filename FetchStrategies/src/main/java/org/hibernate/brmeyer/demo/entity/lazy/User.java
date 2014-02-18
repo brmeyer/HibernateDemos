@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NaturalId;
 
 @Entity
@@ -58,15 +61,19 @@ public class User {
 	private List<Donation> donations = new ArrayList<Donation>();
 	
 	@OneToMany(mappedBy = "submitter")
+	@OrderColumn(name = "projectsSubmitted_index")
 	private List<Project> projectsSubmitted = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy = "organizer")
+	@OrderColumn(name = "projectsOrganized_index")
 	private List<Project> projectsOrganized = new ArrayList<Project>();
 	
 	@ManyToMany(mappedBy = "volunteers")
 	private List<Project> projectsVolunteered = new ArrayList<Project>();
 	
 	@OneToMany(mappedBy = "submitter")
+	@LazyCollection(LazyCollectionOption.EXTRA)
+	@OrderColumn(name = "comments_index") // Index necessary to know which element to lazy-init!
 	private List<Comment> comments = new ArrayList<Comment>();
 	
 	@OneToMany(mappedBy = "organizer")

@@ -38,11 +38,12 @@ public class Join extends AbstractLazyDemo {
 		final Session session = openSession();
 		session.getTransaction().begin();
 
-		// Note: Can use multiple associations with JOIN fetch mode if they're Sets, but results in a cartesian product!
+		// Note: Can use multiple associations with JOIN fetch mode if they are *not*, but results in a cartesian product!
 		
 		final List<User> users = session
 				.createCriteria( User.class )
-				.setFetchMode( "skills", FetchMode.JOIN )
+				.setFetchMode( "projectsSubmitted", FetchMode.JOIN )
+//				.setFetchMode( "projectsOrganized", FetchMode.JOIN )
 				.list();
 
 		session.getTransaction().commit();
@@ -55,7 +56,7 @@ public class Join extends AbstractLazyDemo {
 		final List<User> users = demo.getUsers();
 		// ensure it was fetched
 		for ( final User user : users ) {
-			System.out.println( "fetched: " + Hibernate.isInitialized( user.getSkills() ) );
+			System.out.println( "fetched: " + Hibernate.isInitialized( user.getProjectsSubmitted() ) );
 		}
 		
 		System.exit(0);

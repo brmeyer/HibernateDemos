@@ -36,6 +36,13 @@ public class SimpleLazy extends AbstractLazyDemo {
 		final Session session = openSession();
 		session.getTransaction().begin();
 		final User user = (User) session.get( User.class, id );
+		
+		// this will fetch tools
+//		user.getTools().size(); 
+		
+		// this will extra lazy fetch projects
+//		user.getComments().get( 0 );
+		
 		session.getTransaction().commit();
 		
 		return user != null;
