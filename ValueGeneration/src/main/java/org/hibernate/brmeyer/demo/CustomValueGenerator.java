@@ -31,7 +31,7 @@ import org.hibernate.tuple.ValueGenerator;
 public class CustomValueGenerator implements ValueGenerator<String> {
 
 	@Override
-	public String generateValue(Session session, Object owner) {
+	public String generateValue(Session session, Object entity) {
 		return UUID.randomUUID().toString();
 	}
 }

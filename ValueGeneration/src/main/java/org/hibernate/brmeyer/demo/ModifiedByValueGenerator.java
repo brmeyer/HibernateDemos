@@ -20,36 +20,20 @@
  */
 package org.hibernate.brmeyer.demo;
 
-import org.hibernate.tuple.AnnotationValueGeneration;
-import org.hibernate.tuple.GenerationTiming;
+import java.util.UUID;
+
+import org.hibernate.Session;
 import org.hibernate.tuple.ValueGenerator;
 
 /**
  * @author Brett Meyer
  */
-public class ModifiedByValueGeneration implements AnnotationValueGeneration<ModifiedBy> {
-	
-	private final ModifiedByValueGenerator generator = new ModifiedByValueGenerator();
+public class ModifiedByValueGenerator implements ValueGenerator<String> {
 
 	@Override
-	public void initialize(ModifiedBy annotation, Class<?> propertyType) {
-	}
-
-	public GenerationTiming getGenerationTiming() {
-		return GenerationTiming.ALWAYS;
-	}
-
-	public ValueGenerator<?> getValueGenerator() {
-		return generator;
-	}
-
-	public boolean referenceColumnInSql() {
-		// not used -- needed only for in-DB generation
-		return false;
-	}
-
-	public String getDatabaseGeneratedReferencedColumnValue() {
-		// not used -- needed only for in-DB generation
-		return null;
+	public String generateValue(Session session, Object entity) {
+		// Would normally hook into a service to get the current user, etc.
+		// Including UUID to show generation ALWAYS happening.
+		return "Brett" + " " + UUID.randomUUID().toString();
 	}
 }

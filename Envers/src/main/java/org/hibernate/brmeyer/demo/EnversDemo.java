@@ -80,6 +80,7 @@ public class EnversDemo {
 		s.close();
 	}
 
+	// vertical
 	public List getProjectRevisions() {
 		final Session s = openSession();
 		final AuditReader ar = AuditReaderFactory.get( s );
@@ -88,6 +89,7 @@ public class EnversDemo {
 			    .getResultList();
 	}
 
+	// vertical
 	public List getProjectRevisions(String property) {
 		final Session s = openSession();
 		final AuditReader ar = AuditReaderFactory.get( s );
@@ -97,6 +99,7 @@ public class EnversDemo {
 			    .getResultList();
 	}
 
+	// horizontal
 	public List getRevisionProjects(int revisionNumber) {
 		final Session s = openSession();
 		final AuditReader ar = AuditReaderFactory.get( s );

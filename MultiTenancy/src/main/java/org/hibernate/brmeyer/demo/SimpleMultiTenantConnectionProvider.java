@@ -8,17 +8,20 @@ import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 
 
 public class SimpleMultiTenantConnectionProvider extends AbstractMultiTenantConnectionProvider {
-	
-	public static final String TENANT_1 = "foo1";
-	public static final String TENANT_2 = "foo2";
+
+	public static final String TENANT_ID_1 = "foo1";
+	public static final String TENANT_ID_2 = "foo2";
+
+	public static final String DB_NAME_1 = "foo1_tbl";
+	public static final String DB_NAME_2 = "foo2_tbl";
 	
 	private static final String DRIVER = "org.h2.Driver";
 	private static final String URL = "jdbc:h2:mem:%s;DB_CLOSE_DELAY=-1;MVCC=TRUE";
 	private static final String USER = "sa";
 	private static final String PASS = "";
 	
-	private final ConnectionProvider foo1ConnectionProvider = buildConnectionProvider( TENANT_1 );
-	private final ConnectionProvider foo2ConnectionProvider = buildConnectionProvider( TENANT_2 );
+	private final ConnectionProvider foo1ConnectionProvider = buildConnectionProvider( DB_NAME_1 );
+	private final ConnectionProvider foo2ConnectionProvider = buildConnectionProvider( DB_NAME_2 );
 
 	@Override
 	protected ConnectionProvider getAnyConnectionProvider() {
@@ -27,10 +30,10 @@ public class SimpleMultiTenantConnectionProvider extends AbstractMultiTenantConn
 
 	@Override
 	protected ConnectionProvider selectConnectionProvider(String tenantIdentifier) {
-		if ( TENANT_1.equals( tenantIdentifier ) ) {
+		if ( TENANT_ID_1.equals( tenantIdentifier ) ) {
 			return foo1ConnectionProvider;
 		}
-		else if ( TENANT_2.equals( tenantIdentifier ) ) {
+		else if ( TENANT_ID_2.equals( tenantIdentifier ) ) {
 			return foo2ConnectionProvider;
 		}
 		throw new IllegalArgumentException( "Unknown tenant identifier" );
@@ -46,6 +49,7 @@ public class SimpleMultiTenantConnectionProvider extends AbstractMultiTenantConn
 		
 		// Note that DriverManagerConnectionProviderImpl is an internal class.  However, rather than creating
 		// a ConnectionProvider, I'm using it for simplicity's sake.
+		// DriverManagerConnectionProviderImpl obtains a Connection through the JDBC Driver#connect
 		DriverManagerConnectionProviderImpl connectionProvider = new DriverManagerConnectionProviderImpl();
 		connectionProvider.configure( props );
 		return connectionProvider;

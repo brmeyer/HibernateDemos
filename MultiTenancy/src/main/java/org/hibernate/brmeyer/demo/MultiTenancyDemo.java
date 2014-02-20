@@ -41,14 +41,14 @@ public class MultiTenancyDemo {
 		sessionFactory = configuration.buildSessionFactory(
 				new StandardServiceRegistryBuilder().build() );
 		
-		createTable( SimpleMultiTenantConnectionProvider.TENANT_1 );
-		createTable( SimpleMultiTenantConnectionProvider.TENANT_2 );
+		createTable( SimpleMultiTenantConnectionProvider.TENANT_ID_1 );
+		createTable( SimpleMultiTenantConnectionProvider.TENANT_ID_2 );
 		
-		insertProject( SimpleMultiTenantConnectionProvider.TENANT_1 );
-		insertProject( SimpleMultiTenantConnectionProvider.TENANT_2 );
+		insertProject( SimpleMultiTenantConnectionProvider.TENANT_ID_1 );
+		insertProject( SimpleMultiTenantConnectionProvider.TENANT_ID_2 );
 		
-		printProjects( SimpleMultiTenantConnectionProvider.TENANT_1 );
-		printProjects( SimpleMultiTenantConnectionProvider.TENANT_2 );
+		printProjects( SimpleMultiTenantConnectionProvider.TENANT_ID_1 );
+		printProjects( SimpleMultiTenantConnectionProvider.TENANT_ID_2 );
 		
 		System.exit(0);
 	}
