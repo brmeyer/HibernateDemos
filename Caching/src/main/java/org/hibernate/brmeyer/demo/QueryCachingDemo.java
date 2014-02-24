@@ -104,14 +104,14 @@ public class QueryCachingDemo extends AbstractCachingDemo {
 		project = demo.getProject(projectId);
 		demo.printStats();
 		
-		System.out.println("GET PROJECTS, ATTEMPT #3");
-		// DB hit
-		projects = demo.getProjects();
-		demo.printStats();
-		
 		System.out.println("GET PROJECT, ATTEMPT #4");
 		// query cache hit
 		project = demo.getProject(projectId);
+		demo.printStats();
+		
+		System.out.println("GET PROJECTS, ATTEMPT #3");
+		// DB hit
+		projects = demo.getProjects();
 		demo.printStats();
 		
 		System.out.println("GET PROJECTS, ATTEMPT #4");

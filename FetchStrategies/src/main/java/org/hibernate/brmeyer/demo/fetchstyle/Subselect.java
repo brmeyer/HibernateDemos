@@ -26,6 +26,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.brmeyer.demo.AbstractLazyDemo;
 import org.hibernate.brmeyer.demo.entity.lazy.User;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * @author Brett Meyer
@@ -39,6 +40,7 @@ public class Subselect extends AbstractLazyDemo {
 
 		final List<User> users = session
 				.createCriteria( User.class )
+				.add( Restrictions.gt( "id", 0 ) )
 				.list();
 		
 		// init (#skills uses @Fetch(SUBSELECT))

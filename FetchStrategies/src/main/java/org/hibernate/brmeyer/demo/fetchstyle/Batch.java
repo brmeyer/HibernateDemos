@@ -35,7 +35,7 @@ public class Batch extends AbstractLazyDemo {
 	
 	@Override
 	protected int persistData() {
-		// More data is needed to demo batching...
+		// More data is needed to demo batching, in addition to super#persistData()
 		final Session session = openSession();
 		session.getTransaction().begin();
 		for (int i = 0; i < 10; i++) {
